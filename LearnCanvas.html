@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Canvas</title>
+</head>
+<body>
+    <div>
+        <canvas id="canvas"></canvas>
+    </div>
+    <script type=text/javascript>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        console.log(ctx);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particleArray = [];
+        let hue = 0;
+
+        const mouse = {
+            x : undefined,
+            y : undefined
+        }
+
+        canvas.addEventListener("click", function(event){
+            mouse.x = event.x;
+            mouse.y = event.y;
+            for(let i = 0; i < 10; i++){
+                particleArray.push(new Particle());
+            }
+        })
+
+        canvas.addEventListener("mousemove", function(event){
+            mouse.x = event.x;
+            mouse.y = event.y;
+            for(let i = 0; i < 2; i++){
+                particleArray.push(new Particle());
+            }
+        })
+
+        class Particle {
+            constructor(){
+                // this.x = Math.random() * canvas.width;
+                // this.y = Math.random() * canvas.height;
+                this.x = mouse.x;
+                this.y = mouse.y;
+                this.size = Math.random() * 10 + 1;        //between 1 to 16
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                console.log(this.size,this.speedX, this.speedY)
+                this.color = 'hsl('+ hue +', 100%, 50%)';
+            }
+            update(){
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.1;
+            }
+            draw(){
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // function init(){
+        //     for(let i = 0; i < 1000; i++){
+        //         particleArray.push(new Particle());
+        //         if (particleArray[i].size <= 0.3 ){
+        //             particleArray.splice(i,1);
+        //             i--;
+        //         }
+        //     }
+        // }
+        // init();
+
+        console.log(particleArray)
+
+        function handleParticle(){
+            for(let i = 0; i < particleArray.length; i++){
+                particleArray[i].update();
+                particleArray[i].draw();
+                
+            }
+        }
+
+        function animate(){
+            ctx.fillStyle = "rgba(0,0,0,0.02)";
+            ctx.fillRect(0,0,canvas.width, canvas.height);
+            handleParticle();
+            hue++;
+            requestAnimationFrame(animate);
+            
+        }
+
+        animate();
+    </script>
+</body>
+</html>

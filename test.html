@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="test.css" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <canvas id="canvas"></canvas>
+    </div>
+    <div id="score"></div>
+    <script type="text/javascript">
+
+    function Circle(radius){
+      this.radius = radius,
+      this.draw = function(){
+        console.log("draw");
+      }
+    }
+
+    Circle.apply({}, [1,2,3])
+
+    const another = new Circle();
+
+
+    // let x;
+    // x = 4;
+    // console.log(x);
+    //   var canvas = document.getElementById("canvas");
+    //   var ctx = canvas.getContext("2d");
+    //   console.log(ctx);
+    //   canvas.width = 600;
+    //   canvas.height = 600;
+    //   var objectOne = {
+    //     height: 40,
+    //     width: 40,
+    //     x: 265,
+    //     y: 0,
+    //     color: "#FF0000",
+    //   };
+    //   var objectTwo = {
+    //     height: 40,
+    //     width: 40,
+    //     x: 265,
+    //     y: 500,
+    //     color: "#1703fc",
+    //   };
+
+    //   var dx = 0,
+    //     dy = 0;
+    //   var speed = 180; // px per second
+
+    //   var activeKey = 0;
+
+    //   document.addEventListener("keydown", function (e) {
+    //     if (activeKey == e.keyCode) return;
+    //     activeKey = e.keyCode;
+    //     console.log(e.keyCode);
+    //     //left
+    //     if (e.keyCode == 37) {
+    //       console.log("start moving LEFT");
+    //       dx = -1;
+    //     } else if (e.keyCode == 39) {
+    //       console.log("start moving RIGHT");
+    //       dx = 1;
+    //     } else if (e.keyCode == 65) {
+    //       console.log("start moving LEFT");
+    //       dy = -1;
+    //     } else if (e.keyCode == 68) {
+    //       console.log("start moving RIGHT");
+    //       dy = 1;
+    //     }
+    //   });
+    //   document.addEventListener("keyup", function (e) {
+    //     switch (e.keyCode) {
+    //       case 37: // left
+    //       case 39: // right
+    //         console.log("stop moving HOR");
+    //         dx = 0;
+    //         break;
+    //     }
+    //     switch (e.keyCode) {
+    //       case 65:
+    //       case 68:
+    //         console.log("stop moving HOR");
+    //         dy = 0;
+    //         break;
+    //     }
+    //     activeKey = 0;
+    //   });
+
+    //   function renderCanvas() {
+    //     ctx.fillStyle = "#000000";
+    //     ctx.fillRect(0, 0, 600, 600);
+    //   }
+    //   function renderObjectOne() {
+    //     ctx.fillStyle = "#FF0000";
+    //     ctx.fillRect(
+    //       objectOne.x,
+    //       objectOne.y,
+    //       objectOne.width,
+    //       objectOne.height
+    //     );
+    //   }
+
+    //   function renderObjectTwo() {
+    //     ctx.fillStyle = "#1703fc";
+    //     ctx.fillRect(
+    //       objectTwo.x,
+    //       objectTwo.y,
+    //       objectTwo.width,
+    //       objectTwo.height
+    //     );
+    //   }
+
+    //   function fun() {
+    //     renderCanvas();
+
+    //     objectOne.x += (dx / 60) * speed;
+    //     objectTwo.x += (dy / 60) * speed;
+    //     renderObjectOne();
+    //     renderObjectTwo();
+    //     requestAnimationFrame(fun);
+    //   }
+    //   requestAnimationFrame(fun);
+    </script>
+  </body>
+</html>
+
+<!-- var hero = {
+  element: "hero",
+  x: 250,
+  y: 460,
+};
+
+var keyValue = {
+  Left: 37,
+  up: 38,
+  right: 39,
+  down: 40,
+};
+
+var lastLoopRun = 0;
+
+var controller = {
+    left:false,
+    right:false,
+    up:false,
+    down:false,
+};
+
+function togglekey(keyCode, isPressed) {
+  if (keyValue.left == TRUE) {
+      controller.left = isPressed;
+  }
+  if (keyValue.up == TRUE) {
+      controller.up = isPressed;
+  }
+  if (keyValue.right == TRUE) {
+      controller.right = isPressed;
+  }
+  if (keyValue.down == TRUE) {
+      controller.down = isPressed;
+  }
+}
+
+function loop(){
+    
+}
+
+function setPosition(sprite) {
+  var e = document.getElementById(sprite.element);
+  e.style.left = sprite.x + "px";
+  e.style.top = sprite.y + "px";
+}
+
+setPosition(hero);
+
+document.onkeydown = function (event) {
+  togglekey(event.keyCode, true);
+};
+document.onkeyup = function (event) {
+  togg//lekey(event.keyCode, false);
+}; -->
+
+<!-- var _can = document.getElementById("canvas");
+var _ctx = _can.getContext("2d");
+var _pixelSize = 10;
+var score = 0;
+
+_can.width = 50*_pixelSize;
+_can.height = 50*_pixelSize;
+
+//set canvas background
+
+_can.setAttribute("style", "background-color:lemonchiffon");
+
+//other variables
+var isLeft = false, isRight=false, isBulletFired = false; //these are the bool variable for left, right and bulletfired events
+var isGameOver = false; //Game over variable
+var bulletArr = [], counterTankArr = [];
+
+function addNewCounterTank(){
+  var x = Math.floor(_pixelSize + Math.random() * (_can.width - 3 * _pixelSize)); //x-position is random
+  counterTankArr.push(new CounterTank(x, _pixelSize));
+
+}
+setInterval(addNewCounterTank, 1000);
+
+//function to add or create counter tank
+
+function CounterTank(x,y){
+  this.x = x;
+  this.y = y;
+
+  //draw counter tank
+
+  this.draw = function (){
+    _ctx.fillStyle = "black";
+    _ctx.fillRect(this.x, this.y, 3 * _pixelSize, 2 * _pixelSize);
+    _ctx.fillRect(this.x + _pixelSize, this.y + 2 * _pixelSize, _pixelSize, _pixelSize); 
+  }
+  //update counter tank
+
+  this.update = function () {
+    this.updateTank();
+  }
+  this.updatetank = function(){
+    counterTankArr.forEach(updateCounterTank);
+  }
+}
+
+//function for updateCounterTank
+
+function updateCounterTank(c){
+  c.draw();
+  if(c.y <= _can.height){
+    c.y += 4;  //speed of counter tank downwards
+  }
+}
+
+//create object of counter tank
+
+var _counterTank = new CounterTank(10,10);
+
+//function to draw game
+
+function drawGame(){
+  if (!isGameOver){             //until game is not over plot the game
+    _counterTank.update();
+  }
+  else{
+    alert('Game Over!!!\n\nClick ok to restart the game.');
+    window.location.reload();
+    isGameOver = false;
+  }
+}
+
+//call draw Game every 10 ms
+setInterval(drawGame, 10); -->
